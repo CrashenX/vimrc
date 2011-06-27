@@ -5,3 +5,9 @@ not a comment:
 
     set nocompatible " Use Vim defaults instead of 100% vi compatibility
 
+Relies on the following plugins:
+
+    supertab (https://github.com/ervandew/supertab)
+    eclim    (https://github.com/ervandew/eclim)
+    fugitive (https://github.com/tpope/vim-fugitive)
+

@@ -22,13 +22,13 @@ set comments+=b:\"  " enable '"' as a comment type
 """"""""""""""""""
 " Eclim Settings "
 """"""""""""""""""
-"let g:EclimTaglistEnabled=0     " use default Taglist instead of Eclim
-"let g:taglisttoo_disabled=1     ” maybe of the same use of the above command
-let g:EclimProjectTreeAutoOpen=1 " open Eclipse project tree automatically
-let g:EclimProjectTreeExpandPathOnOpen=1
-let g:EclimProjectTreeSharedInstance=1  " share tree instance through all tabs
-" use tabnew instead of split for new action
-let g:EclimProjectTreeActions = [ {'pattern': '.*', 'name': 'Tab', 'action': 'tabnew'} ]
+""let g:EclimTaglistEnabled=0     " use default Taglist instead of Eclim
+""let g:taglisttoo_disabled=1     ” maybe of the same use of the above command
+"let g:EclimProjectTreeAutoOpen=1 " open Eclipse project tree automatically
+"let g:EclimProjectTreeExpandPathOnOpen=1
+"let g:EclimProjectTreeSharedInstance=1  " share tree instance through all tabs
+"" use tabnew instead of split for new action
+"let g:EclimProjectTreeActions = [ {'pattern': '.*', 'name': 'Tab', 'action': 'tabnew'} ]
 
 """"""""""""""""""""""
 " Command Remappings "

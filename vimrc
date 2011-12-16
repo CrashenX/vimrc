@@ -66,11 +66,11 @@ endif
 """"""""""""""
 " Appearance "
 """"""""""""""
-set t_Co=256         " 256 color in terminal
-set background=dark  " colors that look good with dark background
-syntax on            " enable syntax highlighting
-set nu               " show line numbers
-colorscheme jjc      " personal color scheme
+set t_Co=256           " 256 color in terminal
+set background=dark    " colors that look good with dark background
+syntax on              " enable syntax highlighting
+set nu                 " show line numbers
+colorscheme vividchalk " custom color scheme
 
 """""""""""""""
 " Status Line "

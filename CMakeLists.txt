@@ -7,7 +7,7 @@ project (VIMRC)
 set (VIMRC_VERSION_MAJOR 1)
 set (VIMRC_VERSION_MINOR 0)
 
-set (VIMRC_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/etc/vim/")
+set (VIMRC_INSTALL_DIR "/etc/vim/")
 
 # Copy files with 644 permissions
 install(FILES vimrc.custom

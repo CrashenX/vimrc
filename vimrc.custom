@@ -52,7 +52,12 @@ vnoremap <s-tab> <
 """""""""""""""""
 " Print Options "
 """""""""""""""""
-set printoptions=paper:letter,duplex:off,collate:n
+set printexpr=PrintFile(v:fname_in)
+function PrintFile(fname)
+    call system("lp " . a:fname)
+    call delete(a:fname)
+    return v:shell_error
+endfunc
 
 """""""""
 " Input "

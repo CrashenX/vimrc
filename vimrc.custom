@@ -24,6 +24,12 @@ set comments+=b:\"  " enable '"' as a comment type
 """""""""""
 set hidden " Hide buffer; don't close (keep undo stack)
 
+"""""""""
+" Xclip "
+"""""""""
+noremap <F3> ! xclip -f<CR>
+noremap <F4> :w ! xclip -f<CR><CR>
+
 """"""""""""""""""
 " Eclim Settings "
 """"""""""""""""""

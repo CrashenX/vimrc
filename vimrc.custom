@@ -19,6 +19,11 @@ set secure          " Protect your back door >_>;
 set modeline        " allow modelines
 set comments+=b:\"  " enable '"' as a comment type
 
+"""""""""""
+" Buffers "
+"""""""""""
+set hidden " Hide buffer; don't close (keep undo stack)
+
 """"""""""""""""""
 " Eclim Settings "
 """"""""""""""""""

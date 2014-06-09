@@ -18,6 +18,7 @@ autocmd!
 set secure          " Protect your back door >_>;
 set modeline        " allow modelines
 set comments+=b:\"  " enable '"' as a comment type
+set tags=tags;/     " check for tags from . to /
 
 """""""""""
 " Buffers "

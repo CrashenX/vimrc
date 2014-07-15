@@ -126,8 +126,8 @@ if has('statusline')
         " Broken down into easily includeable segments
         set statusline=%<%f                            " Filename
         set statusline+=%w%h%m%r                       " Options
-        set statusline+=\ [%{&ff}/%Y]                  " Filetype
-        set statusline+=\ cwd:%{getcwd()}              " Current Directory
+        "set statusline+=\ [%{&ff}/%Y]                  " Filetype
+        "set statusline+=\ cwd:%{getcwd()}              " Current Directory
         "set statusline+=\ [A=\%03.3b/H=\%02.2B]        " ASCII / Hex value of char
         set statusline+=%=%l,%c%V\ \                   " Row, Column
         set statusline+=%=%{fugitive#statusline()}\ \  " git info

@@ -20,6 +20,10 @@ set modeline        " allow modelines
 set comments+=b:\"  " enable '"' as a comment type
 set tags=tags;/     " check for tags from . to /
 
+" Slowness fix for vim-jedi: disable jedi signature popup
+"     https://github.com/davidhalter/jedi-vim/issues/217
+let g:jedi#show_call_signatures = "0"
+
 """""""""""
 " Plugins "
 """""""""""

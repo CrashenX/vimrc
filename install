@@ -10,18 +10,20 @@ req_path=$(realpath $from_path/requirements)
 
 wget -N $colorfile
 
-install -v -m 400 $vimrc_path ${HOME}/.vimrc
-install -vD -m 400 $color_path ${HOME}/.vim/colors/vividchalk.vim
+install -v -m 400 $vimrc_path ${HOME}/.vimrc || exit 1
+install -vD -m 400 $color_path ${HOME}/.vim/colors/vividchalk.vim || exit 1
 
 if [[ -e $pathogen_path ]]
 then
-    mv -v $pathogen_path /tmp/vim-$(date +%F-%T)
+    mv -v $pathogen_path /tmp/vim-$(date +%F-%T) || exit 1
 fi
 mkdir -vpm 700 $pathogen_path
 
-pushd $pathogen_path
+pushd $pathogen_path || exit 1
 for i in `cat $req_path`;
 do
-    git clone $i
+    git clone $i || exit 1
 done
 popd
+
+exit 0

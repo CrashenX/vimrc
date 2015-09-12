@@ -1,5 +1,2 @@
-Relies on the following plugins:
-
-    [supertab](https://github.com/ervandew/supertab)
-    [eclim](https://github.com/ervandew/eclim)
-    [fugitive](https://github.com/tpope/vim-fugitive)
+Use `install` to clone the pathogen dependencies and install
+the vimrc in the users home directory.

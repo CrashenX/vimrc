@@ -1,14 +1,14 @@
-" All system-wide defaults are set in $VIMRUNTIME/archlinux.vim (usually just
-" /usr/share/vim/vimfiles/archlinux.vim) and sourced by the call to :runtime
+" All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
+" /usr/share/vim/vimcurrent/debian.vim) and sourced by the call to :runtime
 " you can find below.  If you wish to change any of those settings, you should
-" do it in this file (/etc/vimrc), since archlinux.vim will be overwritten
+" do it in this file (/etc/vim/vimrc), since debian.vim will be overwritten
 " everytime an upgrade of the vim packages is performed.  It is recommended to
-" make changes after sourcing archlinux.vim since it alters the value of the
+" make changes after sourcing debian.vim since it alters the value of the
 " 'compatible' option.
 
 " This line should not be removed as it ensures that various options are
-" properly set to work with the Vim-related packages.
-runtime! archlinux.vim
+" properly set to work with the Vim-related packages available in Debian.
+runtime! debian.vim
 
 """""""""
 " Setup "
@@ -18,17 +18,42 @@ autocmd!
 set secure          " Protect your back door >_>;
 set modeline        " allow modelines
 set comments+=b:\"  " enable '"' as a comment type
+set tags=tags;/     " check for tags from . to /
 
-""""""""""""""""""
-" Eclim Settings "
-""""""""""""""""""
-"let g:EclimTaglistEnabled=0     " use default Taglist instead of Eclim
-"let g:taglisttoo_disabled=1     ” maybe of the same use of the above command
-let g:EclimProjectTreeAutoOpen=1 " open Eclipse project tree automatically
-let g:EclimProjectTreeExpandPathOnOpen=1
-let g:EclimProjectTreeSharedInstance=1  " share tree instance through all tabs
-" use tabnew instead of split for new action
-let g:EclimProjectTreeActions = [ {'pattern': '.*', 'name': 'Tab', 'action': 'tabnew'} ]
+" Slowness fix for vim-jedi: disable jedi signature popup
+"     https://github.com/davidhalter/jedi-vim/issues/217
+let g:jedi#show_call_signatures = "0"
+
+"""""""""""
+" Plugins "
+"""""""""""
+" To enable pathogen (for non-root user):
+"     cd $HOME/src/vim/; git clone git@github.com:tpope/vim-pathogen.git
+" To enable for root user (install for non-root user first):
+"     cd $HOME/src/vim/; su -c 'mkdir -p $HOME/src; ln -s $(pwd) $HOME/src/vim'
+source $HOME/src/vim/vim-pathogen/autoload/pathogen.vim
+execute pathogen#infect('bundle/{}', '$HOME/src/vim/{}')
+" Install the following plugins:
+"     cd $HOME/src/vim/; git clone git@github.com:nvie/vim-flake8.git
+"     cd $HOME/src/vim/; git clone git@github.com:tpope/vim-fugitive.git
+"     cd $HOME/src/vim/; git clone git@github.com:mileszs/ack.vim.git
+"     cd $HOME/src/vim/; git clone git@github.com:sjl/gundo.vim.git
+"     cd $HOME/src/vim/; git clone git@github.com:fs111/pydoc.vim.git
+"     cd $HOME/src/vim/; git clone git@github.com:scrooloose/nerdtree.git
+"     cd $HOME/src/vim/; git clone git@github.com:ervandew/supertab.git
+"     cd $HOME/src/vim/; git clone git@github.com:davidhalter/jedi-vim.git
+autocmd BufWritePost *.py call Flake8()
+
+"""""""""""
+" Buffers "
+"""""""""""
+set hidden " Hide buffer; don't close (keep undo stack)
+
+"""""""""
+" Xclip "
+"""""""""
+noremap <F3> ! xclip -f<CR>
+noremap <F4> :w ! xclip -f<CR><CR>
 
 """"""""""""""""""""""
 " Command Remappings "
@@ -52,7 +77,12 @@ vnoremap <s-tab> <
 """""""""""""""""
 " Print Options "
 """""""""""""""""
-set printoptions=paper:letter,duplex:off,collate:n
+set printexpr=PrintFile(v:fname_in)
+function PrintFile(fname)
+    call system("lp " . a:fname)
+    call delete(a:fname)
+    return v:shell_error
+endfunc
 
 """""""""
 " Input "
@@ -91,8 +121,8 @@ if has('statusline')
         " Broken down into easily includeable segments
         set statusline=%<%f                            " Filename
         set statusline+=%w%h%m%r                       " Options
-        set statusline+=\ [%{&ff}/%Y]                  " Filetype
-        set statusline+=\ cwd:%{getcwd()}              " Current Directory
+        "set statusline+=\ [%{&ff}/%Y]                  " Filetype
+        "set statusline+=\ cwd:%{getcwd()}              " Current Directory
         "set statusline+=\ [A=\%03.3b/H=\%02.2B]        " ASCII / Hex value of char
         set statusline+=%=%l,%c%V\ \                   " Row, Column
         set statusline+=%=%{fugitive#statusline()}\ \  " git info
@@ -115,12 +145,12 @@ set omnifunc=syntaxcomplete#Complete " intellisense
 highlight Pmenu ctermbg=238 gui=bold
 
 " Remap autocomplete menu control keys
-inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
-inoremap <expr> <CR>  pumvisible() ? "\<C-y>" : "\<CR>"
-inoremap <expr> j     pumvisible() ? "\<C-n>" : "j"
-inoremap <expr> k     pumvisible() ? "\<C-p>" : "k"
-inoremap <expr> h     pumvisible() ? "\<PageUp>\<C-n>\<C-p>"   : "h"
-inoremap <expr> l     pumvisible() ? "\<PageDown>\<C-n>\<C-p>" : "l"
+" inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+" inoremap <expr> <CR>  pumvisible() ? "\<C-y>" : "\<CR>"
+" inoremap <expr> j     pumvisible() ? "\<C-n>" : "j"
+" inoremap <expr> k     pumvisible() ? "\<C-p>" : "k"
+" inoremap <expr> h     pumvisible() ? "\<PageUp>\<C-n>\<C-p>"   : "h"
+" inoremap <expr> l     pumvisible() ? "\<PageDown>\<C-n>\<C-p>" : "l"
 
 let g:SuperTabCrMapping = 0 " prevent remap from breaking supertab
 let g:SuperTabDefaultCompletionType = "context"

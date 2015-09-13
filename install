@@ -4,14 +4,14 @@ colorfile="https://raw.githubusercontent.com/CrashenX/\
 vim-vividchalk/master/colors/vividchalk.vim"
 pathogen_path=${HOME}/src/vim/
 from_path=$(dirname $0)
-color_path=$(realpath $from_path/vividchalk.vim)
 vimrc_path=$(realpath $from_path/vimrc)
 req_path=$(realpath $from_path/requirements)
 
-wget -N $colorfile
+wget -NP /tmp/ $colorfile
 
 install -v -m 400 $vimrc_path ${HOME}/.vimrc || exit 1
-install -vD -m 400 $color_path ${HOME}/.vim/colors/vividchalk.vim || exit 1
+install -vD -m 400 /tmp/vividchalk.vim \
+    ${HOME}/.vim/colors/vividchalk.vim || exit 1
 
 if [[ -e $pathogen_path ]]
 then

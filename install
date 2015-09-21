@@ -9,7 +9,7 @@ req_path=$(realpath $from_path/requirements)
 
 wget -NP /tmp/ $colorfile
 
-install -v -m 400 $vimrc_path ${HOME}/.vimrc || exit 1
+install -vD -m 400 $vimrc_path ${HOME}/.vimrc || exit 1
 install -vD -m 400 /tmp/vividchalk.vim \
     ${HOME}/.vim/colors/vividchalk.vim || exit 1
 

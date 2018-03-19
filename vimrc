@@ -34,14 +34,17 @@ let g:jedi#show_call_signatures = "0"
 source $HOME/src/vim/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect('bundle/{}', '$HOME/src/vim/{}')
 " Install the following plugins:
-"     cd $HOME/src/vim/; git clone git@github.com:nvie/vim-flake8.git
-"     cd $HOME/src/vim/; git clone git@github.com:tpope/vim-fugitive.git
-"     cd $HOME/src/vim/; git clone git@github.com:mileszs/ack.vim.git
-"     cd $HOME/src/vim/; git clone git@github.com:sjl/gundo.vim.git
-"     cd $HOME/src/vim/; git clone git@github.com:fs111/pydoc.vim.git
-"     cd $HOME/src/vim/; git clone git@github.com:scrooloose/nerdtree.git
-"     cd $HOME/src/vim/; git clone git@github.com:ervandew/supertab.git
-"     cd $HOME/src/vim/; git clone git@github.com:davidhalter/jedi-vim.git
+"     cd $HOME/src/vim/; git clone https://github.com/davidhalter/jedi-vim.git
+"     cd $HOME/src/vim/; git clone https://github.com/editorconfig/editorconfig-vim.git
+"     cd $HOME/src/vim/; git clone https://github.com/ervandew/supertab.git
+"     cd $HOME/src/vim/; git clone https://github.com/fatih/vim-go.git
+"     cd $HOME/src/vim/; git clone https://github.com/fs111/pydoc.vim.git
+"     cd $HOME/src/vim/; git clone https://github.com/mileszs/ack.vim.git
+"     cd $HOME/src/vim/; git clone https://github.com/nvie/vim-flake8.git
+"     cd $HOME/src/vim/; git clone https://github.com/scrooloose/nerdtree.git
+"     cd $HOME/src/vim/; git clone https://github.com/sjl/gundo.vim.git
+"     cd $HOME/src/vim/; git clone https://github.com/tpope/vim-fugitive.git
+"     cd $HOME/src/vim/; git clone https://github.com/tpope/vim-pathogen.git
 autocmd BufWritePost *.py call Flake8()
 
 """""""""""

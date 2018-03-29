@@ -24,6 +24,8 @@ set tags=tags;/     " check for tags from . to /
 "     https://github.com/davidhalter/jedi-vim/issues/217
 let g:jedi#show_call_signatures = "0"
 
+let g:go_fmt_command = "goimports"
+
 """""""""""
 " Plugins "
 """""""""""

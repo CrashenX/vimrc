@@ -9,6 +9,7 @@ req_path=$(realpath $from_path/requirements)
 
 wget -NP /tmp/ $colorfile
 
+echo install -v -m 400 $vimrc_path ${HOME}/.vimrc || exit 1
 install -v -m 400 $vimrc_path ${HOME}/.vimrc || exit 1
 mkdir -p ${HOME}/.vim/colors/
 install -v -m 400 /tmp/vividchalk.vim \
@@ -25,6 +26,11 @@ for i in `cat $req_path`;
 do
     git clone $i || exit 1
 done
+popd
+
+brew install yarn node || echo "Install nodejs: https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim#install-nodejs--8100-and-yarn-on-mac-os-x"
+pushd $pathogen_path/coc.nvim || exit 1
+bash ./install.sh
 popd
 
 exit 0

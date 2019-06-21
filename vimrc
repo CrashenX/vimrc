@@ -42,6 +42,7 @@ execute pathogen#infect('bundle/{}', '$HOME/src/vim/{}')
 "     cd $HOME/src/vim/; git clone https://github.com/fatih/vim-go.git
 "     cd $HOME/src/vim/; git clone https://github.com/fs111/pydoc.vim.git
 "     cd $HOME/src/vim/; git clone https://github.com/mileszs/ack.vim.git
+"     cd $HOME/src/vim/; git clone https://github.com/neoclide/coc.nvim
 "     cd $HOME/src/vim/; git clone https://github.com/nvie/vim-flake8.git
 "     cd $HOME/src/vim/; git clone https://github.com/scrooloose/nerdtree.git
 "     cd $HOME/src/vim/; git clone https://github.com/sjl/gundo.vim.git

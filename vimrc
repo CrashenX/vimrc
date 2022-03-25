@@ -36,6 +36,7 @@ let g:go_fmt_command = "goimports"
 source $HOME/src/vim/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect('bundle/{}', '$HOME/src/vim/{}')
 " Install the following plugins:
+"     cd $HOME/src/vim/; git clone https://github.com/NLKNguyen/papercolor-theme.git
 "     cd $HOME/src/vim/; git clone https://github.com/davidhalter/jedi-vim.git
 "     cd $HOME/src/vim/; git clone https://github.com/editorconfig/editorconfig-vim.git
 "     cd $HOME/src/vim/; git clone https://github.com/ervandew/supertab.git
@@ -48,7 +49,9 @@ execute pathogen#infect('bundle/{}', '$HOME/src/vim/{}')
 "     cd $HOME/src/vim/; git clone https://github.com/sjl/gundo.vim.git
 "     cd $HOME/src/vim/; git clone https://github.com/tpope/vim-fugitive.git
 "     cd $HOME/src/vim/; git clone https://github.com/tpope/vim-pathogen.git
+"     cd $HOME/src/vim/; git cloen https://github.com/vim-python/python-syntax.git
 autocmd BufWritePost *.py call Flake8()
+let g:python_highlight_all = 1 " Enable python-syntax highlighting
 
 """""""""""
 " Buffers "
@@ -106,7 +109,7 @@ set t_Co=256           " 256 color in terminal
 set background=dark    " colors that look good with dark background
 syntax on              " enable syntax highlighting
 set nu                 " show line numbers
-colorscheme vividchalk " custom color scheme
+colorscheme PaperColor " custom color scheme
 
 """""""""""""""
 " Status Line "

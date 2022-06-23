@@ -1,14 +1,27 @@
-" All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
-" /usr/share/vim/vimcurrent/debian.vim) and sourced by the call to :runtime
-" you can find below.  If you wish to change any of those settings, you should
-" do it in this file (/etc/vim/vimrc), since debian.vim will be overwritten
-" everytime an upgrade of the vim packages is performed.  It is recommended to
-" make changes after sourcing debian.vim since it alters the value of the
-" 'compatible' option.
-
-" This line should not be removed as it ensures that various options are
-" properly set to work with the Vim-related packages available in Debian.
-runtime! debian.vim
+"""""""""""
+" Plugins "
+"""""""""""
+call plug#begin()
+" Theme
+Plug 'NLKNguyen/papercolor-theme'
+" Git Blame, etc.
+Plug 'tpope/vim-fugitive'
+" Git Diff
+Plug 'nvim-lua/plenary.nvim'
+Plug 'sindrets/diffview.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+" Fuzzy Search
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+" Language Help
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+call plug#end()
 
 """""""""
 " Setup "
@@ -20,38 +33,19 @@ set modeline        " allow modelines
 set comments+=b:\"  " enable '"' as a comment type
 set tags=tags;/     " check for tags from . to /
 
+""""""
+" Go "
+""""""
+let g:go_fmt_command = "goimports"
+
+""""""""""
+" Python "
+""""""""""
+autocmd BufWritePost *.py call Flake8()
+autocmd BufRead,BufNewFile *.py let python_highlight_all=1
 " Slowness fix for vim-jedi: disable jedi signature popup
 "     https://github.com/davidhalter/jedi-vim/issues/217
 let g:jedi#show_call_signatures = "0"
-
-let g:go_fmt_command = "goimports"
-
-"""""""""""
-" Plugins "
-"""""""""""
-" To enable pathogen (for non-root user):
-"     cd $HOME/src/vim/; git clone git@github.com:tpope/vim-pathogen.git
-" To enable for root user (install for non-root user first):
-"     cd $HOME/src/vim/; su -c 'mkdir -p $HOME/src; ln -s $(pwd) $HOME/src/vim'
-source $HOME/src/vim/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect('bundle/{}', '$HOME/src/vim/{}')
-" Install the following plugins:
-"     cd $HOME/src/vim/; git clone https://github.com/NLKNguyen/papercolor-theme.git
-"     cd $HOME/src/vim/; git clone https://github.com/davidhalter/jedi-vim.git
-"     cd $HOME/src/vim/; git clone https://github.com/editorconfig/editorconfig-vim.git
-"     cd $HOME/src/vim/; git clone https://github.com/ervandew/supertab.git
-"     cd $HOME/src/vim/; git clone https://github.com/fatih/vim-go.git
-"     cd $HOME/src/vim/; git clone https://github.com/fs111/pydoc.vim.git
-"     cd $HOME/src/vim/; git clone https://github.com/mileszs/ack.vim.git
-"     cd $HOME/src/vim/; git clone https://github.com/neoclide/coc.nvim
-"     cd $HOME/src/vim/; git clone https://github.com/nvie/vim-flake8.git
-"     cd $HOME/src/vim/; git clone https://github.com/scrooloose/nerdtree.git
-"     cd $HOME/src/vim/; git clone https://github.com/sjl/gundo.vim.git
-"     cd $HOME/src/vim/; git clone https://github.com/tpope/vim-fugitive.git
-"     cd $HOME/src/vim/; git clone https://github.com/tpope/vim-pathogen.git
-"     cd $HOME/src/vim/; git cloen https://github.com/vim-python/python-syntax.git
-autocmd BufWritePost *.py call Flake8()
-let g:python_highlight_all = 1 " Enable python-syntax highlighting
 
 """""""""""
 " Buffers "
@@ -142,33 +136,33 @@ endif
 " Searching "
 """""""""""""
 set hlsearch   " highlighted search
-set incsearch  " show the `best match so far' as search strings are typed 
+set incsearch  " show the `best match so far' as search strings are typed
 set ignorecase " make searches case-insensitive ...
 set smartcase  " ... unless they contain upper-case letters
 
 """""""""""""""""""""""""
 " Autocomplete Settings "
 """""""""""""""""""""""""
-filetype plugin on                   " filetype detection
-set omnifunc=syntaxcomplete#Complete " intellisense
-highlight Pmenu ctermbg=238 gui=bold
-
-" Remap autocomplete menu control keys
-" inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
-" inoremap <expr> <CR>  pumvisible() ? "\<C-y>" : "\<CR>"
-" inoremap <expr> j     pumvisible() ? "\<C-n>" : "j"
-" inoremap <expr> k     pumvisible() ? "\<C-p>" : "k"
-" inoremap <expr> h     pumvisible() ? "\<PageUp>\<C-n>\<C-p>"   : "h"
-" inoremap <expr> l     pumvisible() ? "\<PageDown>\<C-n>\<C-p>" : "l"
-
-let g:SuperTabCrMapping = 0 " prevent remap from breaking supertab
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
-
-" have command-line completion <Tab> (for filenames, help topics, option names)
-" first list the available options and complete the longest common part, then
-" have further <Tab>s cycle through the possibilities:
-set wildmode=list:longest,full
+" filetype plugin on                   " filetype detection
+" set omnifunc=syntaxcomplete#Complete " intellisense
+" highlight Pmenu ctermbg=238 gui=bold
+"
+" " Remap autocomplete menu control keys
+" " inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+" " inoremap <expr> <CR>  pumvisible() ? "\<C-y>" : "\<CR>"
+" " inoremap <expr> j     pumvisible() ? "\<C-n>" : "j"
+" " inoremap <expr> k     pumvisible() ? "\<C-p>" : "k"
+" " inoremap <expr> h     pumvisible() ? "\<PageUp>\<C-n>\<C-p>"   : "h"
+" " inoremap <expr> l     pumvisible() ? "\<PageDown>\<C-n>\<C-p>" : "l"
+"
+" let g:SuperTabCrMapping = 0 " prevent remap from breaking supertab
+" let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabContextDefaultCompletionType = "<c-n>"
+"
+" " have command-line completion <Tab> (for filenames, help topics, option names)
+" " first list the available options and complete the longest common part, then
+" " have further <Tab>s cycle through the possibilities:
+" set wildmode=list:longest,full
 
 """"""""""""
 " Spelling "
@@ -199,3 +193,181 @@ execute 'set list'
 
 autocmd BufNewFile,BufRead *.pde set filetype=java " Use java coloring
 
+""""""""""""
+" nvim-cmp "
+""""""""""""
+set completeopt=menu,menuone,noselect
+
+lua <<EOF
+  -- Setup nvim-cmp.
+  local cmp = require'cmp'
+
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+      end,
+    },
+    window = {
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+            ['<Tab>'] = function(fallback)
+              if cmp.visible() then
+                cmp.select_next_item()
+              else
+                fallback()
+              end
+            end,
+            ['<S-Tab>'] = function(fallback)
+              if cmp.visible() then
+                cmp.select_prev_item()
+              else
+                fallback()
+              end
+            end,
+            ['<CR>'] = cmp.mapping.confirm({ select = true }),
+            ['<C-e>'] = cmp.mapping.abort(),
+            ['<Esc>'] = cmp.mapping.close(),
+            ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'vsnip' },
+      { name = 'path' }, -- for path completion
+      { name = 'omni' },
+      { name = 'emoji', insert = true, } -- emoji completion
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Set configuration for specific filetype.
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+  -- Setup lspconfig.
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+  require('lspconfig')['pyright'].setup {
+    capabilities = capabilities
+  }
+  require('lspconfig')['gopls'].setup {
+    capabilities = capabilities
+  }
+
+  vim.cmd[[
+    highlight! link CmpItemMenu Comment
+    " gray
+    highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
+    " blue
+    highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
+    highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
+    " light blue
+    highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
+    highlight! CmpItemKindInterface guibg=NONE guifg=#9CDCFE
+    highlight! CmpItemKindText guibg=NONE guifg=#9CDCFE
+    " pink
+    highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
+    highlight! CmpItemKindMethod guibg=NONE guifg=#C586C0
+    " front
+    highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
+    highlight! CmpItemKindProperty guibg=NONE guifg=#D4D4D4
+    highlight! CmpItemKindUnit guibg=NONE guifg=#D4D4D4
+  ]]
+EOF
+
+"""""""""""
+" Leaderf "
+"""""""""""
+
+" Change leader to ,
+let mapleader = ","
+
+" Do not use cache file
+let g:Lf_UseCache = 0
+" Refresh each time we call leaderf
+let g:Lf_UseMemoryCache = 0
+
+" Ignore certain files and directories when searching files
+let g:Lf_WildIgnore = {
+  \ 'dir': ['.git', '__pycache__', '.DS_Store'],
+  \ 'file': ['*.exe', '*.dll', '*.so', '*.o', '*.pyc', '*.jpg', '*.png',
+  \ '*.gif', '*.svg', '*.ico', '*.db', '*.tgz', '*.tar.gz', '*.gz',
+  \ '*.zip', '*.bin', '*.pptx', '*.xlsx', '*.docx', '*.pdf', '*.tmp',
+  \ '*.wmv', '*.mkv', '*.mp4', '*.rmvb', '*.ttf', '*.ttc', '*.otf',
+  \ '*.mp3', '*.aac']
+  \}
+
+" Only fuzzy-search files names
+let g:Lf_DefaultMode = 'FullPath'
+
+" Popup window settings
+let w = float2nr(&columns * 0.8)
+if w > 140
+  let g:Lf_PopupWidth = 140
+else
+  let g:Lf_PopupWidth = w
+endif
+
+let g:Lf_PopupPosition = [0, float2nr((&columns - g:Lf_PopupWidth)/2)]
+
+" Do not use version control tool to list files under a directory since
+" submodules are not searched by default.
+let g:Lf_UseVersionControlTool = 0
+
+" Use rg as the default search tool
+let g:Lf_DefaultExternalTool = "rg"
+
+" show dot files
+let g:Lf_ShowHidden = 1
+
+" Disable default mapping
+let g:Lf_ShortcutF = ''
+let g:Lf_ShortcutB = ''
+
+" set up working directory for git repository
+let g:Lf_WorkingDirectoryMode = 'a'
+
+" Search files in popup window
+nnoremap <silent> <leader>ff :<C-U>Leaderf file --popup<CR>
+
+" Grep project files in popup window
+nnoremap <silent> <leader>fg :<C-U>Leaderf rg --no-messages --popup<CR>
+
+" Search vim help files
+nnoremap <silent> <leader>fh :<C-U>Leaderf help --popup<CR>
+
+" Search tags in current buffer
+nnoremap <silent> <leader>ft :<C-U>Leaderf bufTag --popup<CR>
+
+" Switch buffers
+nnoremap <silent> <leader>fb :<C-U>Leaderf buffer --popup<CR>
+
+" Search recent files
+nnoremap <silent> <leader>fr :<C-U>Leaderf mru --popup --absolute-path<CR>

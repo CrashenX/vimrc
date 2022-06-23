@@ -1,37 +1,10 @@
 #!/bin/bash
 
-pathogen_path=${HOME}/src/vim/
 from_path=$(dirname "$0")
 vimrc_path=$(realpath "$from_path/vimrc" || grealpath "$from_path/vimrc")
 req_path=$(realpath "$from_path/requirements")
 
-brew install yarn node || echo "Install nodejs: https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim#install-nodejs--8100-and-yarn-on-mac-os-x"
-
 echo install -v -m 400 "$vimrc_path" "${HOME}/.vimrc" || exit 1
-install -v -m 400 "$vimrc_path" "${HOME}/.vimrc" || exit 1
-
-if [[ -e "$pathogen_path" ]]
-then
-    mv -v "$pathogen_path" "/tmp/vim-$(date +%F-%T)" || exit 1
-fi
-mkdir -vp "$pathogen_path"
-
-pushd "$pathogen_path" || exit 1
-while IFS= read -r line
-do
-    git clone "$line" || exit 1
-    repo=$(basename "$line" | sed 's/\.git$//')
-    echo "$line ... $repo"
-    pushd "$repo" || exit 1
-    if [[ "$repo" == "jedi-vim" ]]
-    then
-        git submodule update --init --recursive
-    elif [[ "$repo" == "coc.nvim" ]]
-    then
-        yarn install
-    fi
-    popd || exit 1
-done < "$req_path"
-popd || exit 1
+install -v -m 400 "$vimrc_path" "${HOME}/.config/nvim/init.vim" || exit 1
 
 exit 0

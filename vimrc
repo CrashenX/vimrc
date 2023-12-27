@@ -77,16 +77,6 @@ nnoremap <s-h> :tabprev<CR>
 vnoremap <tab> >
 vnoremap <s-tab> <
 
-"""""""""""""""""
-" Print Options "
-"""""""""""""""""
-set printexpr=PrintFile(v:fname_in)
-function PrintFile(fname)
-    call system("lp " . a:fname)
-    call delete(a:fname)
-    return v:shell_error
-endfunc
-
 """""""""
 " Input "
 """""""""

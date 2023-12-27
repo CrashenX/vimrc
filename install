@@ -4,6 +4,7 @@ from_path=$(dirname "$0")
 vimrc_path=$(realpath "$from_path/vimrc" || grealpath "$from_path/vimrc")
 req_path=$(realpath "$from_path/requirements")
 
+mkdir -p "${HOME}/.config/nvim"
 echo install -v -m 400 "$vimrc_path" "${HOME}/.vimrc" || exit 1
 install -v -m 400 "$vimrc_path" "${HOME}/.config/nvim/init.vim" || exit 1
 

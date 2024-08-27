@@ -21,6 +21,7 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
+Plug 'nvie/vim-flake8'
 call plug#end()
 
 """""""""
@@ -77,6 +78,16 @@ nnoremap <s-h> :tabprev<CR>
 vnoremap <tab> >
 vnoremap <s-tab> <
 
+"""""""""""""""""
+" Print Options "
+"""""""""""""""""
+" set printexpr=PrintFile(v:fname_in)
+" function PrintFile(fname)
+"     call system("lp " . a:fname)
+"     call delete(a:fname)
+"     return v:shell_error
+" endfunc
+
 """""""""
 " Input "
 """""""""
@@ -89,11 +100,13 @@ endif
 """"""""""""""
 " Appearance "
 """"""""""""""
-set t_Co=256           " 256 color in terminal
-set background=dark    " colors that look good with dark background
-syntax on              " enable syntax highlighting
-set nu                 " show line numbers
-colorscheme PaperColor " custom color scheme
+set background=dark                    " colors that look good with dark background
+syntax on                              " enable syntax highlighting
+set nu                                 " show line numbers
+set termguicolors                      " true colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" " https://stackoverflow.com/questions/62702766/termguicolors-in-vim-makes-everything-black-and-white
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " https://stackoverflow.com/questions/62702766/termguicolors-in-vim-makes-everything-black-and-white
+colorscheme PaperColor                 " custom color scheme
 
 """""""""""""""
 " Status Line "
